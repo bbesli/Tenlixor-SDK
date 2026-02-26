@@ -18,8 +18,12 @@ class Tenlixor {
         if (!config.token) {
             throw new Error('Tenlixor: API token is required');
         }
+        if (!config.tenantSlug) {
+            throw new Error('Tenlixor: tenantSlug is required');
+        }
         this.config = {
             token: config.token,
+            tenantSlug: config.tenantSlug,
             language: config.language || 'en',
             apiUrl: config.apiUrl || 'https://api-tenlixor.verbytes.com/api/v1/strings',
             cache: config.cache !== false,
@@ -94,7 +98,8 @@ class Tenlixor {
             const response = await fetch(url, {
                 method: 'GET',
                 headers: {
-                    'Authorization': `Bearer ${this.config.token}`,
+                    'X-Tenant-Slug': this.config.tenantSlug,
+                    'X-API-Key': this.config.token,
                     'Content-Type': 'application/json'
                 }
             });

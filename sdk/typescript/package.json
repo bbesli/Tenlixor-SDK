@@ -1,6 +1,6 @@
 {
   "name": "@verbytes-tenlixor/sdk",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "TypeScript SDK for Tenlixor localization platform with Angular, Vue, and React support",
   "author": "Verbytes <support@verbytes.com>",
   "repository": {
