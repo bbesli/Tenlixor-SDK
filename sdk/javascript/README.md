@@ -18,11 +18,11 @@ A lightweight, zero-dependency JavaScript SDK for integrating Tenlixor localizat
 ### CDN
 
 ```html
-<!-- Latest version -->
-<script src="https://cdn.jsdelivr.net/gh/tenlixor/sdk/javascript/tenlixor.min.js"></script>
+<!-- Latest version (v1.0.1) -->
+<script src="https://cdn.jsdelivr.net/gh/bbesli/Tenlixor-SDK@v1.0.1/sdk/javascript/tenlixor.min.js"></script>
 
 <!-- Or use the full version for development -->
-<script src="https://cdn.jsdelivr.net/gh/bbesli/Tenlixor/sdk/javascript/tenlixor.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/bbesli/Tenlixor-SDK@v1.0.1/sdk/javascript/tenlixor.js"></script>
 ```
 
 > **Note:** For TypeScript/NPM users, use `@verbytes-tenlixor/sdk` package instead.
@@ -59,6 +59,7 @@ Download `tenlixor.min.js` and include it in your project:
   <script>
     // Initialize SDK
     const txr = new Tenlixor({
+      tenantSlug: 'your-tenant-slug',
       token: 'YOUR_API_TOKEN',
       language: 'en'
     });
@@ -93,6 +94,7 @@ Download `tenlixor.min.js` and include it in your project:
 
 | Option | Type | Default | Description |
 |--------|------|---------|-------------|
+| `tenantSlug` | `string` | **(required)** | Your tenant slug identifier |
 | `token` | `string` | **(required)** | Your Tenlixor API token |
 | `language` | `string` | `'en'` | Default language code |
 | `apiUrl` | `string` | `'https://api-tenlixor.verbytes.com/api/v1/strings'` | API base URL |
@@ -105,6 +107,7 @@ Download `tenlixor.min.js` and include it in your project:
 
 ```javascript
 const txr = new Tenlixor({
+  tenantSlug: 'your-tenant-slug',
   token: 'YOUR_API_TOKEN',
   language: 'tr',
   apiUrl: 'https://api-tenlixor.verbytes.com/api/v1/strings',
@@ -345,6 +348,7 @@ Example: `txr_abc123_en`
 
 ```javascript
 const txr = new Tenlixor({
+  tenantSlug: 'your-tenant-slug',
   token: 'YOUR_API_TOKEN',
   cache: false
 });
@@ -395,7 +399,11 @@ console.log(missing); // "non.existent.key"
 </select>
 
 <script>
-  const txr = new Tenlixor({ token: 'YOUR_TOKEN', language: 'en' });
+  const txr = new Tenlixor({ 
+    tenantSlug: 'your-tenant-slug',
+    token: 'YOUR_TOKEN', 
+    language: 'en' 
+  });
   await txr.init();
 
   document.getElementById('language-selector').addEventListener('change', async (e) => {
@@ -413,6 +421,7 @@ console.log(missing); // "non.existent.key"
 
 ```javascript
 const txr = new Tenlixor({
+  tenantSlug: 'your-tenant-slug',
   token: 'YOUR_TOKEN',
   language: localStorage.getItem('user-language') || 'en',
   autoScan: false // Disable auto-scan on init
@@ -435,7 +444,10 @@ txr.on('language-changed', (data) => {
 ### Loading Indicator
 
 ```javascript
-const txr = new Tenlixor({ token: 'YOUR_TOKEN' });
+const txr = new Tenlixor({ 
+  tenantSlug: 'your-tenant-slug',
+  token: 'YOUR_TOKEN' 
+});
 
 // Show loader
 document.getElementById('loader').style.display = 'block';

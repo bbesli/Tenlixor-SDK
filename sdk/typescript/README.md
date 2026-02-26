@@ -33,6 +33,7 @@ pnpm add @verbytes-tenlixor/sdk
 import { Tenlixor } from '@verbytes-tenlixor/sdk';
 
 const txr = new Tenlixor({
+  tenantSlug: 'your-tenant-slug',
   token: 'YOUR_API_TOKEN',
   language: 'en'
 });
@@ -55,7 +56,11 @@ import { NgModule } from '@angular/core';
 import { TenlixorModule, setTenlixorInstance } from '@verbytes-tenlixor/sdk/angular';
 import { Tenlixor } from '@verbytes-tenlixor/sdk';
 
-const txr = new Tenlixor({ token: 'YOUR_TOKEN', language: 'en' });
+const txr = new Tenlixor({ 
+  tenantSlug: 'your-tenant-slug',
+  token: 'YOUR_TOKEN', 
+  language: 'en' 
+});
 txr.init();
 setTenlixorInstance(txr);
 
@@ -83,6 +88,7 @@ import App from './App.vue';
 const app = createApp(App);
 
 app.use(createTenlixorPlugin({
+  tenantSlug: 'your-tenant-slug',
   token: 'YOUR_TOKEN',
   language: 'en'
 }));
@@ -115,7 +121,11 @@ import { TenlixorProvider } from '@verbytes-tenlixor/sdk/react';
 
 function App() {
   return (
-    <TenlixorProvider config={{ token: 'YOUR_TOKEN', language: 'en' }}>
+    <TenlixorProvider config={{ 
+      tenantSlug: 'your-tenant-slug',
+      token: 'YOUR_TOKEN', 
+      language: 'en' 
+    }}>
       <YourApp />
     </TenlixorProvider>
   );
@@ -147,6 +157,7 @@ function MyComponent() {
 
 ```typescript
 interface TenlixorConfig {
+  tenantSlug: string;              // Required: Tenant slug identifier
   token: string;                    // Required: API token
   language?: string;                // Default: 'en'
   apiUrl?: string;                  // Default: API base URL
