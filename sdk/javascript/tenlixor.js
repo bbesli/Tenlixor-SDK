@@ -19,6 +19,7 @@
      * Initialize Tenlixor SDK
      * @param {Object} config - Configuration object
      * @param {string} config.token - API authentication token (required)
+     * @param {string} config.tenantSlug - Tenant slug identifier (required)
      * @param {string} [config.language='en'] - Default language code
      * @param {string} [config.apiUrl='https://api-tenlixor.verbytes.com/api/v1/strings'] - API base URL
      * @param {boolean} [config.cache=true] - Enable caching
@@ -30,9 +31,13 @@
       if (!config.token) {
         throw new Error('Tenlixor: API token is required');
       }
+      if (!config.tenantSlug) {
+        throw new Error('Tenlixor: tenantSlug is required');
+      }
 
       this.config = {
         token: config.token,
+        tenantSlug: config.tenantSlug,
         language: config.language || 'en',
         apiUrl: config.apiUrl || 'https://api-tenlixor.verbytes.com/api/v1/strings',
         cache: config.cache !== false,
@@ -108,7 +113,8 @@
         const response = await fetch(url, {
           method: 'GET',
           headers: {
-            'Authorization': `Bearer ${this.config.token}`,
+            'X-Tenant-Slug': this.config.tenantSlug,
+            'X-API-Key': this.config.token,
             'Content-Type': 'application/json'
           }
         });

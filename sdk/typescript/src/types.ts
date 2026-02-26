@@ -9,6 +9,8 @@
 export interface TenlixorConfig {
   /** API authentication token (required) */
   token: string;
+  /** Tenant slug identifier (required) */
+  tenantSlug: string;
   /** Default language code */
   language?: string;
   /** API base URL */
