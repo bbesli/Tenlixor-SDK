@@ -355,4 +355,4 @@ MIT
 
 ---
 
-**Made with ❤️ by the Tenlixor Team**
+**Made with ❤️ by the Tenlixor Team of Verbytes**

@@ -5,7 +5,7 @@
   "author": "Verbytes <support@verbytes.com>",
   "repository": {
     "type": "git",
-    "url": "https://github.com/bbesli/Tenlixor.git",
+    "url": "https://github.com/bbesli/Tenlixor-SDK.git",
     "directory": "sdk/typescript"
   },
   "main": "dist/index.js",
@@ -52,7 +52,7 @@
   ],
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/bbesli/Tenlixor/issues"
+    "url": "https://github.com/bbesli/Tenlixor-SDK/issues"
   },
   "homepage": "https://tenlixor.verbytes.com",
   "peerDependencies": {

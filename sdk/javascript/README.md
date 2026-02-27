@@ -499,8 +499,8 @@ MIT
 
 ## Support
 
-- 📧 Email: support@tenlixor.com
+- 📧 Email: support-tenlixor@verbytes.com
 - 📖 Documentation: https://documents-tenlixor.verbytes.com/
 ---
 
-**Made with ❤️ by the Tenlixor Team**
+**Made with ❤️ by the Tenlixor Team of Verbytes**
