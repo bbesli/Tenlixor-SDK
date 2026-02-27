@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tenlixor JavaScript SDK Test</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+      background: #f5f5f5;
+    }
+    .container {
+      background: white;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    h1 {
+      color: #333;
+      border-bottom: 3px solid #4CAF50;
+      padding-bottom: 10px;
+    }
+    .test-section {
+      margin: 20px 0;
+      padding: 15px;
+      background: #f9f9f9;
+      border-left: 4px solid #2196F3;
+    }
+    .test-section h2 {
+      margin-top: 0;
+      color: #2196F3;
+    }
+    button {
+      background: #4CAF50;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      margin: 5px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+    button:hover {
+      background: #45a049;
+    }
+    button:disabled {
+      background: #ccc;
+      cursor: not-allowed;
+    }
+    .status {
+      padding: 10px;
+      margin: 10px 0;
+      border-radius: 4px;
+    }
+    .status.success {
+      background: #d4edda;
+      color: #155724;
+      border: 1px solid #c3e6cb;
+    }
+    .status.error {
+      background: #f8d7da;
+      color: #721c24;
+      border: 1px solid #f5c6cb;
+    }
+    .status.info {
+      background: #d1ecf1;
+      color: #0c5460;
+      border: 1px solid #bee5eb;
+    }
+    #log {
+      background: #1e1e1e;
+      color: #d4d4d4;
+      padding: 15px;
+      border-radius: 4px;
+      font-family: 'Courier New', monospace;
+      font-size: 12px;
+      max-height: 400px;
+      overflow-y: auto;
+      margin-top: 20px;
+    }
+    .log-entry {
+      margin: 5px 0;
+      white-space: pre-wrap;
+    }
+    .log-success { color: #4CAF50; }
+    .log-error { color: #f44336; }
+    .log-info { color: #2196F3; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🧪 Tenlixor JavaScript SDK Test Suite</h1>
+    
+    <div class="test-section">
+      <h2>1. SDK Initialization Test</h2>
+      <p>Testing SDK initialization with API credentials</p>
+      <button id="btn-init">Initialize SDK</button>
+      <div id="status-init"></div>
+    </div>
+
+    <div class="test-section">
+      <h2>2. Translation Test</h2>
+      <p>Method 1: Text content matching - <span id="test-text-1">app.welcome</span></p>
+      <p>Method 2: Data attribute - <span data-txr-key="app.description"></span></p>
+      <p>Method 3: Manual translation - <span id="test-manual"></span></p>
+    </div>
+
+    <div class="test-section">
+      <h2>3. Language Switching Test</h2>
+      <button id="btn-en">Switch to English</button>
+      <button id="btn-tr">Switch to Turkish</button>
+      <div id="status-lang"></div>
+    </div>
+
+    <div class="test-section">
+      <h2>4. API Methods Test</h2>
+      <button id="btn-get-lang">Get Current Language</button>
+      <button id="btn-get-avail">Get Available Languages</button>
+      <button id="btn-is-ready">Check If Ready</button>
+      <button id="btn-reload">Reload Translations</button>
+      <div id="status-api"></div>
+    </div>
+
+    <div class="test-section">
+      <h2>5. Event System Test</h2>
+      <button id="btn-test-events">Test Events</button>
+      <div id="status-events"></div>
+    </div>
+
+    <div class="test-section">
+      <h2>6. Cache Test</h2>
+      <button id="btn-clear-cache">Clear Cache</button>
+      <button id="btn-test-cache">Test Cache</button>
+      <div id="status-cache"></div>
+    </div>
+
+    <div id="log"></div>
+  </div>
+
+  <!-- Include Tenlixor SDK -->
+  <script src="../../sdk/javascript/tenlixor.js"></script>
+  
+  <script>
+    // Logging utility
+    const log = {
+      info: (msg) => {
+        console.log('ℹ️', msg);
+        addToLog('info', msg);
+      },
+      success: (msg) => {
+        console.log('✅', msg);
+        addToLog('success', msg);
+      },
+      error: (msg) => {
+        console.error('❌', msg);
+        addToLog('error', msg);
+      }
+    };
+
+    function addToLog(type, message) {
+      const logDiv = document.getElementById('log');
+      const entry = document.createElement('div');
+      entry.className = `log-entry log-${type}`;
+      entry.textContent = `[${new Date().toLocaleTimeString()}] ${message}`;
+      logDiv.appendChild(entry);
+      logDiv.scrollTop = logDiv.scrollHeight;
+    }
+
+    function showStatus(elementId, message, type) {
+      const el = document.getElementById(elementId);
+      el.innerHTML = `<div class="status ${type}">${message}</div>`;
+    }
+
+    // Test configuration - REPLACE WITH YOUR CREDENTIALS
+    const TEST_CONFIG = {
+      tenantSlug: 'verbytes',
+      token: 'sk_7de92730_45a45ff50d1dd6f4e1f28854f2eb0544',
+      language: 'en',
+      cache: true
+    };
+
+    let txr = null;
+
+    // Test 1: Initialization
+    document.getElementById('btn-init').addEventListener('click', async () => {
+      log.info('Starting SDK initialization test...');
+      
+      try {
+        txr = new Tenlixor(TEST_CONFIG);
+        log.success('SDK instance created successfully');
+
+        // Setup event listeners
+        txr.on('loaded', (data) => {
+          log.success(`Translations loaded for language: ${data.language}`);
+          showStatus('status-init', `✅ SDK initialized successfully! Language: ${data.language}`, 'success');
+        });
+
+        txr.on('error', (error) => {
+          log.error(`Error occurred: ${error.code} - ${error.message}`);
+          showStatus('status-init', `❌ Error: ${error.message}`, 'error');
+        });
+
+        txr.on('language-changed', (data) => {
+          log.info(`Language changed from ${data.from} to ${data.to}`);
+        });
+
+        await txr.init();
+        log.success('SDK initialization completed');
+
+        // Enable other test buttons
+        document.querySelectorAll('button:not(#btn-init)').forEach(btn => {
+          btn.disabled = false;
+        });
+
+        // Test manual translation
+        setTimeout(() => {
+          const translation = txr.t('app.welcome');
+          document.getElementById('test-manual').textContent = translation;
+          log.success(`Manual translation test: app.welcome = "${translation}"`);
+        }, 1000);
+
+      } catch (error) {
+        log.error(`Initialization failed: ${error.message}`);
+        showStatus('status-init', `❌ Initialization failed: ${error.message}`, 'error');
+      }
+    });
+
+    // Test 3: Language Switching
+    document.getElementById('btn-en').addEventListener('click', async () => {
+      if (!txr) return;
+      log.info('Switching to English...');
+      try {
+        await txr.setLanguage('en');
+        showStatus('status-lang', '✅ Switched to English', 'success');
+      } catch (error) {
+        log.error(`Language switch failed: ${error.message}`);
+        showStatus('status-lang', `❌ Failed: ${error.message}`, 'error');
+      }
+    });
+
+    document.getElementById('btn-tr').addEventListener('click', async () => {
+      if (!txr) return;
+      log.info('Switching to Turkish...');
+      try {
+        await txr.setLanguage('tr');
+        showStatus('status-lang', '✅ Switched to Turkish', 'success');
+      } catch (error) {
+        log.error(`Language switch failed: ${error.message}`);
+        showStatus('status-lang', `❌ Failed: ${error.message}`, 'error');
+      }
+    });
+
+    // Test 4: API Methods
+    document.getElementById('btn-get-lang').addEventListener('click', () => {
+      if (!txr) return;
+      const lang = txr.getLanguage();
+      log.info(`Current language: ${lang}`);
+      showStatus('status-api', `Current language: <strong>${lang}</strong>`, 'info');
+    });
+
+    document.getElementById('btn-get-avail').addEventListener('click', () => {
+      if (!txr) return;
+      const langs = txr.getAvailableLanguages();
+      log.info(`Available languages: ${langs.join(', ')}`);
+      showStatus('status-api', `Available languages: <strong>${langs.join(', ')}</strong>`, 'info');
+    });
+
+    document.getElementById('btn-is-ready').addEventListener('click', () => {
+      if (!txr) return;
+      const ready = txr.isReady();
+      log.info(`SDK ready status: ${ready}`);
+      showStatus('status-api', `SDK is ${ready ? 'ready ✅' : 'not ready ❌'}`, ready ? 'success' : 'error');
+    });
+
+    document.getElementById('btn-reload').addEventListener('click', async () => {
+      if (!txr) return;
+      log.info('Reloading translations...');
+      try {
+        await txr.reload();
+        log.success('Translations reloaded successfully');
+        showStatus('status-api', '✅ Translations reloaded', 'success');
+      } catch (error) {
+        log.error(`Reload failed: ${error.message}`);
+        showStatus('status-api', `❌ Failed: ${error.message}`, 'error');
+      }
+    });
+
+    // Test 5: Events
+    document.getElementById('btn-test-events').addEventListener('click', () => {
+      if (!txr) return;
+      log.info('Testing event system...');
+      
+      let eventCount = 0;
+      const testCallback = (data) => {
+        eventCount++;
+        log.success(`Event fired! Count: ${eventCount}`);
+      };
+
+      txr.on('language-changed', testCallback);
+      log.info('Event listener registered');
+      
+      setTimeout(() => {
+        txr.off('language-changed', testCallback);
+        log.info('Event listener removed');
+        showStatus('status-events', '✅ Event system working correctly', 'success');
+      }, 1000);
+    });
+
+    // Test 6: Cache
+    document.getElementById('btn-clear-cache').addEventListener('click', () => {
+      if (!txr) return;
+      const currentLang = txr.getLanguage();
+      txr.clearCache(currentLang);
+      log.success(`Cache cleared for language: ${currentLang}`);
+      showStatus('status-cache', `✅ Cache cleared for ${currentLang}`, 'success');
+    });
+
+    document.getElementById('btn-test-cache').addEventListener('click', () => {
+      if (!txr) return;
+      log.info('Testing cache...');
+      const cacheKey = txr.getCacheKey(txr.getLanguage());
+      log.info(`Cache key: ${cacheKey}`);
+      
+      const cached = localStorage.getItem(cacheKey);
+      if (cached) {
+        log.success('Cache data found in localStorage');
+        showStatus('status-cache', '✅ Cache is working', 'success');
+      } else {
+        log.error('No cache data found');
+        showStatus('status-cache', '⚠️ No cache data found', 'error');
+      }
+    });
+
+    // Disable all buttons except init button initially
+    document.querySelectorAll('button:not(#btn-init)').forEach(btn => {
+      btn.disabled = true;
+    });
+
+    log.info('Test suite loaded. Click "Initialize SDK" to begin tests.');
+  </script>
+</body>
+</html>
