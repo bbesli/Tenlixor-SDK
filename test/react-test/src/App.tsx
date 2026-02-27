@@ -5,7 +5,7 @@ import './App.css';
 // Test configuration
 const TEST_CONFIG = {
   tenantSlug: 'verbytes',
-  token: 'de92730_45a45ff50d1dd6f4e1f28854f2eb0544',
+  token: 'sk_7de92730_45a45ff50d1dd6f4e1f28854f2eb0544',
   language: 'en'
 };
 

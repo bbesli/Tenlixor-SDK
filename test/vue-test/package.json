@@ -9,7 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@verbytes-tenlixor/sdk": "file:../../sdk/typescript",
+    "@verbytes-tenlixor/sdk": "^1.0.5",
     "vue": "^3.3.0"
   },
   "devDependencies": {

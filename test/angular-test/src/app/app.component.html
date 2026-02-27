@@ -1,0 +1,76 @@
+<div class="test-container">
+  <h1>{{ title }}</h1>
+
+  <div *ngIf="!isReady" class="loading">
+    Initializing SDK...
+  </div>
+
+  <div *ngIf="isReady">
+    <div class="test-section">
+      <h2>1. SDK Status</h2>
+      <div class="status-grid">
+        <div class="status-item">
+          <strong>Ready:</strong> {{ isReady ? '✅ Yes' : '❌ No' }}
+        </div>
+        <div class="status-item">
+          <strong>Current Language:</strong> {{ currentLanguage }}
+        </div>
+        <div class="status-item">
+          <strong>Available Languages:</strong> {{ availableLanguages.join(', ') }}
+        </div>
+      </div>
+    </div>
+
+    <div class="test-section">
+      <h2>2. Translation Test (txrTranslate Pipe)</h2>
+      <div class="translation-test">
+        <div class="translation-item">
+          <strong>app.welcome:</strong> {{ 'app.welcome' | txrTranslate }}
+        </div>
+        <div class="translation-item">
+          <strong>app.description:</strong> {{ 'app.description' | txrTranslate }}
+        </div>
+        <div class="translation-item">
+          <strong>Missing key:</strong> {{ 'non.existent.key' | txrTranslate }}
+        </div>
+      </div>
+    </div>
+
+    <div class="test-section">
+      <h2>3. Translation with Language Override</h2>
+      <div class="translation-test">
+        <div class="translation-item">
+          <strong>app.welcome (EN):</strong> {{ 'app.welcome' | txrTranslate:'en' }}
+        </div>
+        <div class="translation-item">
+          <strong>app.welcome (TR):</strong> {{ 'app.welcome' | txrTranslate:'tr' }}
+        </div>
+      </div>
+    </div>
+
+    <div class="test-section">
+      <h2>4. Language Switching</h2>
+      <div class="button-group">
+        <button 
+          *ngFor="let lang of availableLanguages"
+          (click)="changeLanguage(lang)"
+          [class.active]="isCurrentLanguage(lang)">
+          Switch to {{ lang.toUpperCase() }}
+        </button>
+      </div>
+    </div>
+
+    <div class="test-section">
+      <h2>5. Event Logs</h2>
+      <div class="logs">
+        <div *ngIf="logs.length === 0" class="log-empty">
+          No logs yet. Try switching languages!
+        </div>
+        <div *ngFor="let log of logs" class="log-entry">
+          {{ log }}
+        </div>
+      </div>
+      <button (click)="clearLogs()">Clear Logs</button>
+    </div>
+  </div>
+</div>
