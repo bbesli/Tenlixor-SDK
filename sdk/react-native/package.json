@@ -1,0 +1,66 @@
+{
+  "name": "@verbytes-tenlixor/react-native",
+  "version": "1.0.0",
+  "description": "React Native SDK for Tenlixor localization platform with AsyncStorage support",
+  "author": "Verbytes <support@verbytes.com>",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bbesli/Tenlixor-SDK.git",
+    "directory": "sdk/react-native"
+  },
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "react-native": "src/index.ts",
+  "scripts": {
+    "build": "tsc",
+    "build:watch": "tsc --watch",
+    "prepublishOnly": "npm run build",
+    "test": "jest",
+    "lint": "eslint src --ext .ts,.tsx",
+    "format": "prettier --write \"src/**/*.{ts,tsx}\""
+  },
+  "files": [
+    "dist",
+    "src",
+    "README.md",
+    "LICENSE"
+  ],
+  "keywords": [
+    "tenlixor",
+    "localization",
+    "i18n",
+    "translation",
+    "internationalization",
+    "l10n",
+    "react-native",
+    "mobile",
+    "ios",
+    "android",
+    "sdk"
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/bbesli/Tenlixor-SDK/issues"
+  },
+  "homepage": "https://tenlixor.verbytes.com",
+  "peerDependencies": {
+    "react": ">=16.8.0",
+    "react-native": ">=0.60.0",
+    "@react-native-async-storage/async-storage": ">=1.0.0"
+  },
+  "devDependencies": {
+    "@react-native-async-storage/async-storage": "^1.21.0",
+    "@types/react": "^18.0.0",
+    "@types/react-native": "^0.72.0",
+    "@typescript-eslint/eslint-plugin": "^6.0.0",
+    "@typescript-eslint/parser": "^6.0.0",
+    "eslint": "^8.0.0",
+    "prettier": "^3.0.0",
+    "react": "^18.2.0",
+    "react-native": "^0.73.0",
+    "typescript": "^5.9.3"
+  },
+  "engines": {
+    "node": ">=16.0.0"
+  }
+}
