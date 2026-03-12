@@ -104,9 +104,9 @@ class _TenlixorDemoState extends State<TenlixorDemo> {
   }
 
   Widget _buildLoading() {
-    return const Column(
+    return Column(
       mainAxisAlignment: MainAxisAlignment.center,
-      children: [
+      children: const [
         CircularProgressIndicator(),
         SizedBox(height: 16),
         Text('Loading translations...'),
@@ -160,7 +160,7 @@ class _TenlixorDemoState extends State<TenlixorDemo> {
             runSpacing: 8,
             children: txr.availableLanguages.map((lang) {
               final isActive = lang == txr.language;
-              return FilledButton.tonal(
+              return ElevatedButton(
                 onPressed: txr.isLoading || isActive
                     ? null
                     : () => txr.setLanguage(lang),

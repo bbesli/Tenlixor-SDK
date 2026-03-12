@@ -94,10 +94,10 @@ class _TenlixorExampleState extends State<TenlixorExample> {
       ),
       body: txr.isReady
           ? _buildContent()
-          : const Center(
+          : Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
-                children: [
+                children: const [
                   CircularProgressIndicator(),
                   SizedBox(height: 16),
                   Text(

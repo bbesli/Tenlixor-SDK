@@ -75,9 +75,9 @@
     },
     {
       "name": "http",
-      "rootUri": "file:///C:/Users/Kothyron/AppData/Local/Pub/Cache/hosted/pub.dev/http-1.6.0",
+      "rootUri": "file:///C:/Users/Kothyron/AppData/Local/Pub/Cache/hosted/pub.dev/http-0.13.6",
       "packageUri": "lib/",
-      "languageVersion": "3.4"
+      "languageVersion": "2.19"
     },
     {
       "name": "http_parser",
