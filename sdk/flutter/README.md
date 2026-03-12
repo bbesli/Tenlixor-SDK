@@ -307,6 +307,18 @@ flutter pub get
 flutter run
 ```
 
+### 🌐 Try on Zapp.run
+
+Want to test instantly without installing Flutter? Try our [Zapp.run example](./ZAPP_EXAMPLE.md)!
+
+**Quick Start on Zapp.run:**
+1. Go to https://zapp.run/
+2. Add `tenlixor: ^1.0.0` to dependencies
+3. Copy the example code from [ZAPP_EXAMPLE.md](./ZAPP_EXAMPLE.md)
+4. Run instantly in browser!
+
+*Note*: Package must be published to pub.dev first. See [PUBLISHING.md](./PUBLISHING.md) for instructions.
+
 ## Platform Support
 
 | Platform | Support |
