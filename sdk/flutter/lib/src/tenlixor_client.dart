@@ -196,16 +196,15 @@ class Tenlixor extends ChangeNotifier {
     }
 
     try {
-      final baseUrl = config.apiUrl ?? 'https://api.tenlixor.verbytes.com/api/v1';
-      final url = Uri.parse('$baseUrl/strings/resources');
+      final baseUrl = config.apiUrl ?? 'https://api-tenlixor.verbytes.com/api/v1/strings';
+      final url = Uri.parse('$baseUrl?language_code=${Uri.encodeComponent(languageCode)}');
       
       final response = await http.get(
         url,
         headers: {
-          'Authorization': 'Bearer ${config.token}',
-          'Content-Type': 'application/json',
+          'X-API-Key': config.token,
           'X-Tenant-Slug': config.tenantSlug,
-          'X-Language-Code': languageCode,
+          'Content-Type': 'application/json',
         },
       );
 
@@ -214,7 +213,7 @@ class Tenlixor extends ChangeNotifier {
         final apiResponse = TenlixorResponse.fromJson(data);
 
         if (apiResponse.success) {
-          _mergeData(languageCode, apiResponse.resources);
+          _mergeData(apiResponse.data);
           _cacheTimestamps[languageCode] = DateTime.now().millisecondsSinceEpoch;
 
           // Save to storage
@@ -225,13 +224,16 @@ class Tenlixor extends ChangeNotifier {
           if (!background) {
             _emitEvent(TenlixorEventType.loaded, {
               'language': languageCode,
-              'count': apiResponse.resources.length,
+              'count': apiResponse.data.languages.fold<int>(
+                0,
+                (sum, lang) => sum + lang.resources.length,
+              ),
             });
           }
         } else {
-          throw TenlixorError(
+          throw const TenlixorError(
             code: TenlixorErrorCode.invalidResponse,
-            message: apiResponse.error ?? 'Invalid response from API',
+            message: 'Invalid response from API',
           );
         }
       } else if (response.statusCode == 401) {
@@ -253,16 +255,18 @@ class Tenlixor extends ChangeNotifier {
   }
 
   /// Merge translation data
-  void _mergeData(String languageCode, List<TenlixorResource> resources) {
-    _translations[languageCode] ??= {};
-    
-    for (final resource in resources) {
-      _translations[languageCode]![resource.key] = resource.value;
-    }
+  void _mergeData(TenlixorResponseData responseData) {
+    for (final language in responseData.languages) {
+      _translations[language.code] ??= {};
+      
+      for (final resource in language.resources) {
+        _translations[language.code]![resource.key] = resource.value;
+      }
 
-    // Update available languages
-    if (!_availableLanguages.contains(languageCode)) {
-      _availableLanguages.add(languageCode);
+      // Update available languages
+      if (!_availableLanguages.contains(language.code)) {
+        _availableLanguages.add(language.code);
+      }
     }
   }
 

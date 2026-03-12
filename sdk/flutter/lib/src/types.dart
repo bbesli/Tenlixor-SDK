@@ -60,53 +60,150 @@ class TenlixorConfig {
 
 /// Translation resource data
 class TenlixorResource {
+  final String id;
   final String key;
   final String value;
-  final String languageCode;
+  final String description;
+  final String? createdBy;
+  final String? updatedBy;
+  final String createdAt;
+  final String updatedAt;
 
   const TenlixorResource({
+    required this.id,
     required this.key,
     required this.value,
-    required this.languageCode,
+    required this.description,
+    this.createdBy,
+    this.updatedBy,
+    required this.createdAt,
+    required this.updatedAt,
   });
 
   factory TenlixorResource.fromJson(Map<String, dynamic> json) {
     return TenlixorResource(
+      id: json['id'] as String,
       key: json['key'] as String,
       value: json['value'] as String,
-      languageCode: json['language_code'] as String,
+      description: json['description'] as String? ?? '',
+      createdBy: json['created_by'] as String?,
+      updatedBy: json['updated_by'] as String?,
+      createdAt: json['created_at'] as String,
+      updatedAt: json['updated_at'] as String,
     );
   }
 
   Map<String, dynamic> toJson() {
     return {
+      'id': id,
       'key': key,
       'value': value,
-      'language_code': languageCode,
+      'description': description,
+      'created_by': createdBy,
+      'updated_by': updatedBy,
+      'created_at': createdAt,
+      'updated_at': updatedAt,
     };
   }
 }
 
-/// API response structure
+/// Language data with resources
+class TenlixorLanguage {
+  final String code;
+  final List<TenlixorResource> resources;
+
+  const TenlixorLanguage({
+    required this.code,
+    required this.resources,
+  });
+
+  factory TenlixorLanguage.fromJson(Map<String, dynamic> json) {
+    return TenlixorLanguage(
+      code: json['code'] as String,
+      resources: (json['resources'] as List<dynamic>?)
+              ?.map((item) => TenlixorResource.fromJson(item as Map<String, dynamic>))
+              .toList() ??
+          [],
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'code': code,
+      'resources': resources.map((r) => r.toJson()).toList(),
+    };
+  }
+}
+
+/// API response data structure
+class TenlixorResponseData {
+  final String tenantId;
+  final List<TenlixorLanguage> languages;
+
+  const TenlixorResponseData({
+    required this.tenantId,
+    required this.languages,
+  });
+
+  factory TenlixorResponseData.fromJson(Map<String, dynamic> json) {
+    return TenlixorResponseData(
+      tenantId: json['tenant_id'] as String,
+      languages: (json['languages'] as List<dynamic>?)
+              ?.map((item) => TenlixorLanguage.fromJson(item as Map<String, dynamic>))
+              .toList() ??
+          [],
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'tenant_id': tenantId,
+      'languages': languages.map((l) => l.toJson()).toList(),
+    };
+  }
+}
+
+/// API response metadata
+class TenlixorResponseMeta {
+  final int page;
+  final int limit;
+  final int total;
+
+  const TenlixorResponseMeta({
+    required this.page,
+    required this.limit,
+    required this.total,
+  });
+
+  factory TenlixorResponseMeta.fromJson(Map<String, dynamic> json) {
+    return TenlixorResponseMeta(
+      page: json['page'] as int,
+      limit: json['limit'] as int,
+      total: json['total'] as int,
+    );
+  }
+}
+
+/// Complete API response structure
 class TenlixorResponse {
   final bool success;
-  final List<TenlixorResource> resources;
-  final String? error;
+  final TenlixorResponseData data;
+  final TenlixorResponseMeta meta;
+  final String requestId;
 
   const TenlixorResponse({
     required this.success,
-    required this.resources,
-    this.error,
+    required this.data,
+    required this.meta,
+    required this.requestId,
   });
 
   factory TenlixorResponse.fromJson(Map<String, dynamic> json) {
     return TenlixorResponse(
       success: json['success'] as bool? ?? false,
-      resources: (json['resources'] as List<dynamic>?)
-              ?.map((item) => TenlixorResource.fromJson(item as Map<String, dynamic>))
-              .toList() ??
-          [],
-      error: json['error'] as String?,
+      data: TenlixorResponseData.fromJson(json['data'] as Map<String, dynamic>),
+      meta: TenlixorResponseMeta.fromJson(json['meta'] as Map<String, dynamic>),
+      requestId: json['request_id'] as String,
     );
   }
 }
