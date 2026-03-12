@@ -24,7 +24,7 @@ Add this to your package's `pubspec.yaml` file:
 
 ```yaml
 dependencies:
-  tenlixor: ^1.0.2
+  tenlixor: ^1.0.3
 ```
 
 Then run:

@@ -1,6 +1,6 @@
 name: tenlixor
 description: Flutter SDK for Tenlixor localization platform with SharedPreferences support for offline translations.
-version: 1.0.2
+version: 1.0.3
 homepage: https://tenlixor.verbytes.com
 repository: https://github.com/bbesli/Tenlixor-SDK
 issue_tracker: https://github.com/bbesli/Tenlixor-SDK/issues
