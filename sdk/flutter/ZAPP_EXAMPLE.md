@@ -20,7 +20,7 @@ In the `pubspec.yaml` editor, add:
 dependencies:
   flutter:
     sdk: flutter
-  tenlixor: ^1.0.1
+  tenlixor: ^1.0.2
 ```
 
 ### 3. Copy the Example Code
