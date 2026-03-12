@@ -4,9 +4,9 @@ This example demonstrates how to use the Tenlixor Flutter SDK on [Zapp.run](http
 
 ## 🔗 Try it on Zapp.run
 
-Once the package is published to pub.dev, you can test it directly on Zapp.run:
+✅ **Package is now compatible with Zapp.run!**
 
-**Link**: [Open in Zapp.run](https://zapp.run/edit/tenlixor-example) *(Coming soon)*
+**Link**: [Open in Zapp.run](https://zapp.run/edit/tenlixor-example) *(Create your own project)*
 
 ## 📋 How to Use on Zapp.run
 
@@ -20,7 +20,7 @@ In the `pubspec.yaml` editor, add:
 dependencies:
   flutter:
     sdk: flutter
-  tenlixor: ^1.0.0
+  tenlixor: ^1.0.1
 ```
 
 ### 3. Copy the Example Code
