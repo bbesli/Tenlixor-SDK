@@ -343,15 +343,31 @@ npm run format
 
 Requires TypeScript 5.0+
 
+## Related SDKs
+
+Looking for mobile support?
+
+### 📱 React Native SDK
+For iOS and Android apps with AsyncStorage support:
+
+```bash
+npm install @verbytes-tenlixor/react-native
+```
+
+[📖 React Native SDK Documentation](../react-native/README.md)
+
+### 🎯 Flutter SDK (Coming Soon)
+Dart SDK for Flutter applications with SharedPreferences support.
+
 ## License
 
 MIT
 
 ## Support
 
-- 📧 Email: support@tenlixor.com
-- 📖 Docs: https://docs.tenlixor.com
-- 🐛 Issues: https://github.com/tenlixor/sdk/issues
+- 📧 Email: support@verbytes.com
+- 📖 Docs: https://tenlixor.verbytes.com
+- 🐛 Issues: https://github.com/bbesli/Tenlixor-SDK/issues
 
 ---
 
