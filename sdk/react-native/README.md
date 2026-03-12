@@ -282,6 +282,11 @@ Ensure you're using TypeScript 4.5+ and have `@types/react-native` installed.
 - 🐛 Issues: [GitHub Issues](https://github.com/bbesli/Tenlixor-SDK/issues)
 - 📚 Docs: [tenlixor.verbytes.com](https://tenlixor.verbytes.com)
 
+## Related SDKs
+
+- 🌐 [TypeScript/JavaScript SDK](../typescript) - Web applications
+- 🎯 [Flutter SDK](../flutter) - Flutter apps ([pub.dev](https://pub.dev/packages/tenlixor))
+
 ## License
 
 MIT © [Verbytes](https://verbytes.com)

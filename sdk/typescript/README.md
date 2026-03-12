@@ -354,10 +354,16 @@ For iOS and Android apps with AsyncStorage support:
 npm install @verbytes-tenlixor/react-native
 ```
 
-[📖 React Native SDK Documentation](../react-native/README.md)
+[📖 React Native SDK Documentation](../react-native/README.md) | [📦 npm](https://www.npmjs.com/package/@verbytes-tenlixor/react-native)
 
-### 🎯 Flutter SDK (Coming Soon)
-Dart SDK for Flutter applications with SharedPreferences support.
+### 🎯 Flutter SDK
+For Flutter applications with SharedPreferences support:
+
+```bash
+flutter pub add tenlixor
+```
+
+[📖 Flutter SDK Documentation](../flutter/README.md) | [📦 pub.dev](https://pub.dev/packages/tenlixor)
 
 ## License
 

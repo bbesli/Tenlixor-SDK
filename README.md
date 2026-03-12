@@ -69,7 +69,7 @@ flutter pub add tenlixor
 - 🎯 Full Dart type safety
 - ⚡ Fast & lightweight
 
-[📖 Documentation](./sdk/flutter/README.md) | [📦 pub.dev](https://pub.dev/packages/tenlixor) (Coming Soon)
+[📖 Documentation](./sdk/flutter/README.md) | [📦 pub.dev](https://pub.dev/packages/tenlixor)
 
 ## 🚀 Quick Start
 

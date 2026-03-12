@@ -5,6 +5,8 @@ Official Flutter SDK for [Tenlixor](https://tenlixor.verbytes.com) localization 
 [![pub package](https://img.shields.io/pub/v/tenlixor.svg)](https://pub.dev/packages/tenlixor)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
+🎉 **Now available on pub.dev!** - [View on pub.dev](https://pub.dev/packages/tenlixor)
+
 ## Features
 
 - 📱 **iOS & Android Support** - Works seamlessly on both platforms
@@ -317,7 +319,7 @@ Want to test instantly without installing Flutter? Try our [Zapp.run example](./
 3. Copy the example code from [ZAPP_EXAMPLE.md](./ZAPP_EXAMPLE.md)
 4. Run instantly in browser!
 
-*Note*: Package must be published to pub.dev first. See [PUBLISHING.md](./PUBLISHING.md) for instructions.
+**✅ Package is live on pub.dev!** You can now test it on Zapp.run.
 
 ## Platform Support
 
