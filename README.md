@@ -54,8 +54,22 @@ npm install @verbytes-tenlixor/react-native @react-native-async-storage/async-st
 
 ---
 
-#### Flutter SDK (Coming Soon)
+#### [Flutter SDK](./sdk/flutter)
 Dart SDK for Flutter applications with SharedPreferences support.
+
+```bash
+flutter pub add tenlixor
+```
+
+**Features:**
+- 📱 iOS & Android support
+- 💾 Persistent storage with SharedPreferences
+- 🔔 Event streams (loaded, languageChanged, error)
+- 🎨 ChangeNotifier integration
+- 🎯 Full Dart type safety
+- ⚡ Fast & lightweight
+
+[📖 Documentation](./sdk/flutter/README.md) | [📦 pub.dev](https://pub.dev/packages/tenlixor) (Coming Soon)
 
 ## 🚀 Quick Start
 
